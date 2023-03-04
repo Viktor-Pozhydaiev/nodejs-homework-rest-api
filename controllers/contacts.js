@@ -71,4 +71,3 @@ module.exports = {
   updateContactById: contrWrapper(updateContactById),
   updateStatusContact: contrWrapper(updateStatusContact),
 };
-
