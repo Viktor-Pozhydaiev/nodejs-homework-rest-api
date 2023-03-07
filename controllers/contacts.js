@@ -32,7 +32,7 @@ const addContact = async (req, res) => {
 const updateContactById = async (req, res) => {
   const { _id: owner } = req.user;
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndUpdate(
+  const result = await Contact.findOneAndUpdate(
     { _id: contactId, owner },
     req.body,
     {
@@ -48,7 +48,7 @@ const updateContactById = async (req, res) => {
 const updateStatusContact = async (req, res) => {
   const { _id: owner } = req.user;
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndUpdate(
+  const result = await Contact.findOneAndUpdate(
     { _id: contactId, owner },
     req.body,
     {
@@ -65,7 +65,7 @@ const updateStatusContact = async (req, res) => {
 const deletedContactById = async (req, res) => {
   const { _id: owner } = req.user;
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndRemove({ _id: contactId, owner });
+  const result = await Contact.findOneAndRemove({ _id: contactId, owner });
   if (!result) {
     throw HttpError(404, "Not found!");
   }
