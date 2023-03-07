@@ -1,11 +1,9 @@
 const HttpError = require("./HttpError");
-
 const contrWrapper = require("./contrWrapper");
-const handelMongooseError = require("./handelMongooseError");
+const handleMongooseError = require("./handelMongooseError");
 
 module.exports = {
   HttpError,
   contrWrapper,
-  handelMongooseError}
-
-
+  handleMongooseError,
+};

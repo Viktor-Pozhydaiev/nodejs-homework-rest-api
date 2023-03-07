@@ -1,13 +1,14 @@
-const { isValidObjectId } = require("mongoose");
-
 const { HttpError } = require("../utils");
 
-const isValidId = (req, res, next) => {
-  const { contactId } = req.params;
-  if (!isValidObjectId(contactId)) {
-    next(HttpError(400, `${contactId} is not valid id`));
-  }
-  next();
+const validateBody = (schema) => {
+  const valFn = (req, res, next) => {
+    const { error } = schema.validate(req.body);
+    if (error) {
+      next(HttpError(400, error.message));
+    }
+    next();
+  };
+  return valFn;
 };
 
-module.exports = isValidId;
+module.exports = validateBody;
