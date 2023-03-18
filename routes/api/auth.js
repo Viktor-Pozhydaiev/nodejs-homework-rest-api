@@ -13,6 +13,15 @@ router.post(
   validateBody(schemas.registerSchema),
   contr.register
 );
+
+router.get("/users/verify/:verificationToken", contr.verifyEmail);
+
+router.post(
+  "/users/verify",
+  validateBody(schemas.emailSchema),
+  contr.resendVerify
+);
+
 router.post("/users/login", validateBody(schemas.loginSchema), contr.login);
 
 router.get("/users/current", authentication, contr.getCurrent);
@@ -27,4 +36,3 @@ router.patch(
 );
 
 module.exports = router;
-
