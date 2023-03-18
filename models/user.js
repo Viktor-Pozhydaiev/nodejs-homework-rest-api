@@ -31,11 +31,23 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, "Verify token is required!"],
+    },
   },
   { versionKey: false, timestamps: false }
 );
 
 userSchema.post("save", handleMongooseError);
+
+const emailSchema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
+});
 
 const registerSchema = Joi.object({
   name: Joi.string().required(),
@@ -58,4 +70,5 @@ const User = model("user", userSchema);
 module.exports = {
   User,
   schemas,
+  emailSchema,
 };
